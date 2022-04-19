@@ -2,10 +2,6 @@
 # require("randomForest")
 # require("nnet")
 # require("NeuralNetTools")
-# install.packages('devtools')
-# library(devtools)
-# install_github('fawda123/NeuralNetTools', ref = 'development')
-# install.packages('NeuralNetTools')
 
 varimportance<-function(time2,time3,status2,status3,residual,covs,dataset,method,
                         #GBM
@@ -22,11 +18,11 @@ varimportance<-function(time2,time3,status2,status3,residual,covs,dataset,method
                         #
                         p=1, na.action=NULL, subset=NULL,
                         ...
- # residual is an output of Multistate_residuals function
- # p is the probability used to construct train data (defult is 1 (use all data))
- # covs is the vector of covariate's name
- # method=c("GBM","RF","ANN") # Gradient Boosting(GBM) & Random Forest (RF) & Neural Network (ANN)
- ){
+                        # residual is an output of Multistate_residuals function
+                        # p is the probability used to construct train data (defult is 1 (use all data))
+                        # covs is the vector of covariate's name
+                        # method=c("GBM","RF","ANN") # Gradient Boosting(GBM) & Random Forest (RF) & Neural Network (ANN)
+){
   
   varimp<-NULL
   meth<-c("GBM","RF","ANN")
@@ -57,10 +53,9 @@ varimportance<-function(time2,time3,status2,status3,residual,covs,dataset,method
     b<-c(b,a)
   }
   b
-  data12<-datatrans12[c(7,8,a,b)]
-  data13<-datatrans13[c(7,8,a+1,b+1)]
-  data23<-datatrans23[c(7,8,a+2,b+2)]
-  
+  data12<-datatrans12[c(8+length(covs)+1,b)]
+  data13<-datatrans13[c(8+length(covs)+2,b+1)]
+  data23<-datatrans23[c(8+length(covs)+3,b+2)]
   
   data_train12 <- sample(1:nrow(data12), size = round(p * nrow(data12)),replace = FALSE)
   data_train13 <- sample(1:nrow(data13), size = round(p * nrow(data13)),replace = FALSE)
@@ -246,3 +241,5 @@ varimportance<-function(time2,time3,status2,status3,residual,covs,dataset,method
   
   return(varimp)
 }
+
+
