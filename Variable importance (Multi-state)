@@ -155,11 +155,11 @@ varimportance<-function(time2,time3,status2,status3,residual,covs,dataset,method
                             importance=TRUE, 
                             localImp=localImp, 
                             nPerm=nPerm,...)
-    a12<-(RFtrans12$importance)
-    a13<-(RFtrans13$importance)
-    a23<-(RFtrans23$importance)
-    
-    varimp<-list(RF.residual12=a12,RF.residual13=a13,RF.residual23=a23)
+    a12<-as.matrix(sort(RFtrans12$importance[,2], decreasing = T))
+    a13<-as.matrix(sort(RFtrans13$importance[,2], decreasing = T))
+    a23<-as.matrix(sort(RFtrans23$importance[,2], decreasing = T))
+
+    varimp<-list(RF.varimp12(IncNodePurity)=a12,RF.varimp13(IncNodePurity)=a13,RF.varimp23(IncNodePurity)=a23)
   }
   
   # Neural network
@@ -241,5 +241,3 @@ varimportance<-function(time2,time3,status2,status3,residual,covs,dataset,method
   
   return(varimp)
 }
-
-
