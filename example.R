@@ -1,6 +1,6 @@
 
 library(haven)
-multistate_data <- read_sav("J:/Variable selection on multi-state model/Codes/git hub materials/multistate_data.sav")
+multistate_data <- read_sav("J:/multistate_data.sav")
 covs<-c("X1","X2","X3","X4","X5","X6","X7","X8","X9")
 
 res.martingale.resid<-Multistate_residuals(time2=t.trans2,time3=t.trans3,status2=s.trans2,status3=s.trans3,dataset=multistate_data,residual="martingale.residual")
